@@ -15,23 +15,22 @@ class ShoppingList : AppCompatActivity() {
         addList()
     }
 
+    /**
+     * Vycistenie zoznamu a odstranenie z databazy
+     */
     fun clearList(view: View) {
         val dbHelper = MyDatabase(this)
         val db = dbHelper.readableDatabase
-        // Define 'where' part of query.
-        val selection = "${MyDatabase.RecipeReader.ListEntry.COLUMN_INGREDIENTS} LIKE ?"
-        // Specify arguments in placeholder order.
-        val text = findViewById<TextView>(R.id.shopping_list)
-        val selectionArgs = arrayOf(text.text.toString())
-        // Issue SQL statement.
-        val deletedRows = db.delete(MyDatabase.RecipeReader.ListEntry.TABLE_NAME, selection, selectionArgs)
-
+        db.execSQL("delete from "+ MyDatabase.RecipeReader.ListEntry.TABLE_NAME)
         val toast = Toast.makeText(applicationContext, "Vymazané", Toast.LENGTH_LONG)
         toast.show()
 
         finish()
     }
 
+    /**
+     * Zobrazanie zoznamu, pricom najskor zoznam ziskame z databazy a nasledne ho zobrazime
+     */
     private fun addList() {
         val dbHelper = MyDatabase(this)
         val db = dbHelper.readableDatabase
@@ -67,7 +66,11 @@ class ShoppingList : AppCompatActivity() {
             textView.setText("Nákupný zoznam je prázdny")
         }
         else {
-            textView.setText(itemIngredients[0])
+            var text = ""
+            for (item in itemIngredients) {
+                text = text + "\n" + item
+            }
+            textView.setText(text)
         }
     }
 }

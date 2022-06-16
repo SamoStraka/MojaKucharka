@@ -9,48 +9,49 @@ import android.widget.Toast
 
 
 class AddRecipe : AppCompatActivity() {
-    //val databaseK = KucharkaDatabase.getInstance(application).recipeDao
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_recipe)
     }
 
+    /**
+     * Pridanie databazy receptu do databazy pomocou vyplnenych inputov
+     */
     fun addRecipe(view: View) {
+        // najdenie miest, kde sa nachadzaju vkladane texty
         val name = findViewById<EditText>(R.id.name_recipe).text.toString()
         val ingredients = findViewById<EditText>(R.id.ingredients_recipe).text.toString()
         val instructions = findViewById<EditText>(R.id.instructions_recipe).text.toString()
 
-        val recipe = Recipe()
-
-        //val addRecipeViewModel = AddRecipeViewModel(databaseK, requireNotNull(application))
-
-        recipe.ingredients = ingredients
-        recipe.name = name
-        recipe.instructions = instructions
-
+        // osetrenie zadaneho vstupu
+        if  (name.isEmpty() || ingredients.isEmpty() || instructions.isEmpty()) {
+            val toastEmpty = Toast.makeText(applicationContext, "Potrebné vyplniť všetky položky", Toast.LENGTH_LONG)
+            toastEmpty.show()
+            return
+        }
+        //databaza
         val dbHelper = MyDatabase(this)
         val db = dbHelper.writableDatabase
 
-        // Create a new map of values, where column names are the keys
+        // vytvorenie hodnot, kde su ako kluce jednotilve stlpce tabulky
         val values = ContentValues().apply {
             put(MyDatabase.RecipeReader.RecipeEntry.COLUMN_NAME, name)
             put(MyDatabase.RecipeReader.RecipeEntry.COLUMN_INGREDIENTS, ingredients)
             put(MyDatabase.RecipeReader.RecipeEntry.COLUMN_INSTRUCTIONS, instructions)
         }
 
-        // Insert the new row, returning the primary key value of the new row
+        // Vlozenie riadku
         val newRowId = db?.insert(MyDatabase.RecipeReader.RecipeEntry.TABLE_NAME, null, values)
-        //addRecipeViewModel.addRecipe(recipe)
 
-        val toast = Toast.makeText(applicationContext, "Pridané", Toast.LENGTH_LONG)
-        toast.show()
+        if (newRowId == -1L) {
+            val toast = Toast.makeText(applicationContext, "Nepodarilo sa pridať", Toast.LENGTH_LONG)
+            toast.show()
+        } else {
+            val toast = Toast.makeText(applicationContext, "Pridané", Toast.LENGTH_LONG)
+            toast.show()
+        }
 
         finish()
-
-        //insert(recipe)
     }
-
-
 
 }

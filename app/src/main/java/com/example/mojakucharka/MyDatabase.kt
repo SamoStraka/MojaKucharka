@@ -8,12 +8,18 @@ import androidx.annotation.Nullable
 
 class MyDatabase(@Nullable context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+    /**
+     * SQL query pre vytvorenie tabulky recipe
+     */
     private val SQL_CREATE_ENTRIES =
         "CREATE TABLE ${RecipeReader.RecipeEntry.TABLE_NAME} (" +
                 "${BaseColumns._ID} INTEGER PRIMARY KEY," +
                 "${RecipeReader.RecipeEntry.COLUMN_NAME} TEXT," +
                 "${RecipeReader.RecipeEntry.COLUMN_INGREDIENTS} TEXT," +
                 "${RecipeReader.RecipeEntry.COLUMN_INSTRUCTIONS} TEXT)"
+    /**
+     * SQL query pre vytvorenie tabulky list
+     */
     private val SQL_CREATE_LIST =
         "CREATE TABLE ${RecipeReader.ListEntry.TABLE_NAME} (" +
                 "${BaseColumns._ID} INTEGER PRIMARY KEY," +
@@ -27,6 +33,9 @@ class MyDatabase(@Nullable context: Context) : SQLiteOpenHelper(context, DATABAS
         db.execSQL(SQL_CREATE_LIST)
     }
 
+    /**
+     * override metody potrebnej pre funkcionalitu databazy
+     */
     override fun onUpgrade(db: SQLiteDatabase, p1: Int, p2: Int) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
@@ -35,6 +44,9 @@ class MyDatabase(@Nullable context: Context) : SQLiteOpenHelper(context, DATABAS
         onCreate(db)
     }
 
+    /**
+     * objekt pre tabulky recipe a list, ktora reprazentuju recept a nakupny zoznam
+     */
     object RecipeReader {
         // Table contents are grouped together in an anonymous object.
         object RecipeEntry : BaseColumns {
@@ -49,6 +61,9 @@ class MyDatabase(@Nullable context: Context) : SQLiteOpenHelper(context, DATABAS
         }
     }
 
+    /**
+     * objekt pre nazov sqlite databazy
+     */
     companion object {
         // If you change the database schema, you must increment the database version.
         const val DATABASE_VERSION = 2
