@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">MojaKucharka</string>
+    <string name="app_name">MojaKuchaka</string>
+    <string name="input_name">Názov Receptu</string>
+    <string name="input_ingredience">Ingrediencie</string>
+    <string name="input_instructions">Postup</string>
+    <string name="add_button">Pridať Recept</string>
+    <string name="recipes">Recepty</string>
+    <string name="add_to_list">Do zoznamu</string>
+    <string name="delete_recipe">Odstrániť</string>
+    <string name="clear_list">Vymazať zoznam</string>
 </resources>
