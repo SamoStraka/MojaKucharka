@@ -1,20 +1,11 @@
 package com.example.mojakucharka
 
 import android.content.ContentValues
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.BaseColumns
-import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.lifecycle.AndroidViewModel
-import com.example.mojakucharka.database.KucharkaDatabase
-import com.example.mojakucharka.database.MyDatabase
-import com.example.mojakucharka.database.Recipe
-
 
 
 class AddRecipe : AppCompatActivity() {

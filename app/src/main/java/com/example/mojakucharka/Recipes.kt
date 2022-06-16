@@ -5,13 +5,10 @@ import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
-import android.text.Layout
-import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.example.mojakucharka.database.MyDatabase
 
 class Recipes : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

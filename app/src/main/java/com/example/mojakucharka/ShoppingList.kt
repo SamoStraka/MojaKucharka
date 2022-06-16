@@ -7,8 +7,6 @@ import android.provider.BaseColumns
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.example.mojakucharka.database.MyDatabase
-import org.w3c.dom.Text
 
 class ShoppingList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

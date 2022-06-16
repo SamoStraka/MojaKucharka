@@ -1,4 +1,4 @@
-package com.example.mojakucharka.database
+package com.example.mojakucharka
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
